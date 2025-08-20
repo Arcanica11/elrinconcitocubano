@@ -1,0 +1,13 @@
+{
+  "navbar":{
+    "home": "Home",
+    "services": "SErvices",
+    "aboutUs": "Abaut Us",
+    "contactUs": "Contact Us"
+  },
+  "hero":{  
+   "title": "The Little Cuban Corner",
+    "subtitle": "Authentic cuisine celebrating heritage and passion.",
+    "button": "View Menu"
+  }
+}
