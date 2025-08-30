@@ -24,14 +24,14 @@ export const MobileMenu = ({ locale, navLinks }) => {
       <div 
         className={`fixed inset-0 bg-stone-900 bg-opacity-95 z-50 transform ${isOpen ? 'translate-x-0' : 'translate-x-full'} transition-transform duration-300 ease-in-out md:hidden`}
       >
-        <div className="flex justify-end p-6">
+        <div className="flex justify-end p-6 ">
           <button onClick={toggleMenu} aria-label="Close menu">
             <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
-        <nav className="flex flex-col items-center space-y-8 mt-10">
+        <nav className="flex flex-col items-center space-y-8 mt-10 bg-stone-900 p-8 rounded-lg">
           {navLinks.map((link) => (
             <Link 
               key={link.href}
