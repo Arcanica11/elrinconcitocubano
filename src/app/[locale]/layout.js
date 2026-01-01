@@ -3,7 +3,7 @@ import { Poppins } from 'next/font/google'
 import { dir } from 'i18next'
 import { languages } from '../i18n/settings'
 import Navbar from '../../components/Navbar.js'; // <-- ¡Sin las llaves!
-
+import ClosedNotice from '../../components/ClosedNotice.js';  
 const poppins = Poppins({
   subsets: ['latin'],
   weight: ['400', '700']
@@ -22,6 +22,7 @@ export default function RootLayout({ children, params: { locale } }) {
   return (
     <html lang={locale} dir={dir(locale)}>
       <body className={`${poppins.className} bg-gray-50`}>
+        <ClosedNotice />
         <Navbar locale={locale} />
         <main>
           {children}
