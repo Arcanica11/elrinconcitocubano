@@ -4,9 +4,11 @@
 import { useState, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { SplashAnimation } from './SplashAnimation';
-import React from 'react'; // 👈 Importa React
 
-export const PageAnimator = ({ children }) => {
+// PageAnimator only controls the splash overlay.
+// It does NOT wrap children — children are always rendered by the Server Component.
+// The splash is an overlay that hides the page briefly, then fades away.
+export const PageAnimator = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -20,13 +22,8 @@ export const PageAnimator = ({ children }) => {
   }, []);
 
   return (
-    <>
-      <AnimatePresence>
-        {loading && <SplashAnimation />}
-      </AnimatePresence>
-
-      {/* Cuando no esté cargando, mostramos los hijos */}
-      {!loading && children}
-    </>
+    <AnimatePresence>
+      {loading && <SplashAnimation />}
+    </AnimatePresence>
   );
 };
