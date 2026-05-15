@@ -1,13 +1,26 @@
-import { useTranslation } from '../app/i18n';
+import { getTranslation } from '../app/i18n';
 import Image from 'next/image';
-// We'll use placeholders for images as requested.
 
 const Menu = async ({ locale }) => {
-  const { t } = await useTranslation(locale, 'common');
+  const { t } = await getTranslation(locale, 'common');
 
   const menuData = t('menu', { returnObjects: true });
 
   if (!menuData || !menuData.categories) return null;
+
+  // Helper: Image wrapper with consistent styling - object-fit contain keeps full image visible
+  const MenuImage = ({ src, alt }) => (
+    <div className="relative w-full overflow-hidden rounded-xl border border-stone-700/50 shadow-2xl bg-stone-900 transition-transform hover:scale-105 duration-300" style={{ aspectRatio: '16/9' }}>
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        sizes="(max-width: 768px) 100vw, 50vw"
+        style={{ objectFit: 'contain' }}
+        className="opacity-90 hover:opacity-100 transition-opacity duration-300 p-2"
+      />
+    </div>
+  );
 
   return (
     <section className="bg-stone-900 py-16 text-white font-sans relative overflow-hidden" id="menu">
@@ -23,15 +36,16 @@ const Menu = async ({ locale }) => {
           {menuData.title}
         </h2>
 
-        {/* Cuban Pizza Section */}
+        {/* ─── 1. CUBAN PIZZA ─── */}
         <div className="mb-24">
           <div className="flex justify-center mb-12">
             <h3 className="text-4xl md:text-6xl font-black text-white uppercase text-center border-b-4 border-red-600 pb-2 inline-block drop-shadow-lg">
               {menuData.categories.cubanPizza}
             </h3>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+            {/* Left column: Classics, Vegetables, Extras */}
             <div className="bg-stone-800/30 p-8 rounded-2xl border border-stone-700/50">
               <h4 className="text-3xl font-bold text-red-500 mb-6 uppercase text-center tracking-wide">{menuData.cubanPizza.classics}</h4>
               <ul className="space-y-3 mb-10">
@@ -64,7 +78,8 @@ const Menu = async ({ locale }) => {
               </ul>
             </div>
 
-            <div className="flex flex-col">
+            {/* Right column: Specials + El Rinconcito Pizza + Pizza image */}
+            <div className="flex flex-col gap-8">
               <div className="bg-stone-800/30 p-8 rounded-2xl border border-stone-700/50 flex-grow">
                 <h4 className="text-3xl font-bold text-red-500 mb-6 uppercase text-center tracking-wide">{menuData.cubanPizza.specials}</h4>
                 <ul className="space-y-3 mb-8">
@@ -86,64 +101,48 @@ const Menu = async ({ locale }) => {
                   </p>
                 </div>
               </div>
-              
-              <div className="bg-stone-800/60 backdrop-blur-sm rounded-xl aspect-video mt-8 flex items-center justify-center border border-stone-700/50 shadow-2xl overflow-hidden relative transition-transform hover:scale-105 duration-300">
-                 <Image 
-                   src="/pizza-rinconcito.png" 
-                   alt="Pizza El Rinconcito" 
-                   fill 
-                   style={{ objectFit: 'contain' }} 
-                   className="opacity-90 hover:opacity-100 transition-opacity duration-300 p-2" 
-                 />
-              </div>
+
+              <MenuImage src="/pizza-rinconcito.png" alt="Pizza El Rinconcito" />
             </div>
           </div>
         </div>
 
-        {/* Main Dishes Section */}
+        {/* ─── 2. MAIN DISHES ─── */}
         <div className="mb-24">
           <h3 className="text-4xl md:text-5xl font-black text-red-600 mb-10 uppercase text-center md:text-left border-b-4 border-yellow-500 pb-2 inline-block drop-shadow-md">
             {menuData.categories.mainDishes}
           </h3>
-          <div className="flex flex-col-reverse md:flex-row gap-12 items-center">
-            <div className="w-full md:w-1/2 flex flex-col gap-6">
-               <div className="bg-stone-800/60 backdrop-blur-sm rounded-xl aspect-square flex items-center justify-center border border-stone-700/50 shadow-2xl overflow-hidden relative transition-transform hover:scale-105 duration-300">
-                 <Image 
-                   src="/plato-principales-rinconcito.png" 
-                   alt="Platos Principales El Rinconcito" 
-                   fill 
-                   style={{ objectFit: 'contain' }} 
-                   className="opacity-90 hover:opacity-100 transition-opacity duration-300 p-2" 
-                 />
-               </div>
+          <div className="flex flex-col-reverse md:flex-row gap-12 items-start">
+            <div className="w-full md:w-1/2">
+              <MenuImage src="/plato-principales-rinconcito.png" alt="Platos Principales El Rinconcito" />
             </div>
             <div className="w-full md:w-1/2">
-               <ul className="space-y-6">
-                 {menuData.mainDishesList.items.map((item, i) => (
-                   <li key={i} className="flex flex-col border-b border-stone-800 pb-3">
-                     <div className="flex justify-between text-xl font-bold items-center gap-4">
-                       <span className="uppercase text-stone-100">{item.name}</span>
-                       <span className="text-yellow-400 whitespace-nowrap bg-stone-800/80 px-2 py-1 rounded-md">${item.price}</span>
-                     </div>
-                     {item.desc && <span className="text-stone-400 text-sm font-medium mt-2">{item.desc}</span>}
-                   </li>
-                 ))}
-               </ul>
+              <ul className="space-y-6">
+                {menuData.mainDishesList.items.map((item, i) => (
+                  <li key={i} className="flex flex-col border-b border-stone-800 pb-3">
+                    <div className="flex justify-between text-xl font-bold items-center gap-4">
+                      <span className="uppercase text-stone-100">{item.name}</span>
+                      <span className="text-yellow-400 whitespace-nowrap bg-stone-800/80 px-2 py-1 rounded-md">${item.price}</span>
+                    </div>
+                    {item.desc && <span className="text-stone-400 text-sm font-medium mt-2">{item.desc}</span>}
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
 
-        {/* Full Meals Section */}
+        {/* ─── 3. FULL MEALS ─── */}
         <div className="mb-24">
           <h3 className="text-5xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-yellow-500 mb-16 uppercase text-center drop-shadow-lg">
             {menuData.categories.fullMeals}
           </h3>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-            <div className="flex flex-col">
-              <div className="bg-stone-800/30 p-8 rounded-2xl border border-stone-700/50 mb-8 flex-grow">
+            <div className="flex flex-col gap-8">
+              <div className="bg-stone-800/30 p-8 rounded-2xl border border-stone-700/50">
                 <h4 className="text-4xl font-black text-red-600 mb-8 uppercase flex items-center gap-4">
-                  {menuData.fullMeals.appetizers} 
+                  {menuData.fullMeals.appetizers}
                   <span className="text-yellow-400 text-2xl bg-stone-900/80 px-3 py-1 rounded-md border border-stone-700">$10</span>
                 </h4>
                 <ul className="space-y-4">
@@ -152,28 +151,20 @@ const Menu = async ({ locale }) => {
                   ))}
                 </ul>
               </div>
-              
-              <div className="bg-stone-800/60 backdrop-blur-sm rounded-xl aspect-video flex items-center justify-center border border-stone-700/50 shadow-2xl overflow-hidden relative transition-transform hover:scale-105 duration-300">
-                 <Image 
-                   src="/aperitivos-rinconcito.png" 
-                   alt="Aperitivos El Rinconcito" 
-                   fill 
-                   style={{ objectFit: 'contain' }} 
-                   className="opacity-90 hover:opacity-100 transition-opacity duration-300 p-2" 
-                 />
-              </div>
+
+              <MenuImage src="/aperitivos-rinconcito.png" alt="Aperitivos El Rinconcito" />
             </div>
-            
+
             <div className="bg-stone-800/30 p-8 rounded-2xl border border-stone-700/50">
               <div className="mb-10">
                 <div className="flex flex-col mb-8">
                   <h4 className="text-4xl font-black text-red-600 uppercase mb-2 flex items-center gap-4">
-                    {menuData.fullMeals.fullMeal} 
+                    {menuData.fullMeals.fullMeal}
                     <span className="text-yellow-400 text-2xl bg-stone-900/80 px-3 py-1 rounded-md border border-stone-700">$20</span>
                   </h4>
                   <h5 className="text-2xl font-bold text-red-500 uppercase tracking-widest">{menuData.fullMeals.mainDishesDesc}</h5>
                 </div>
-                
+
                 <ul className="space-y-3">
                   {menuData.fullMeals.fullMealItems.map((item, i) => (
                     <li key={i} className="text-lg font-bold uppercase text-stone-200 flex items-center before:content-['•'] before:text-red-500 before:mr-3">{item.name}</li>
@@ -206,74 +197,58 @@ const Menu = async ({ locale }) => {
           </div>
         </div>
 
-        {/* Desserts & Drinks Section */}
+        {/* ─── 4. DESSERTS & DRINKS ─── */}
         <div className="mb-12">
-          <div className="flex flex-col md:flex-row gap-12 items-center mb-12">
+          <div className="flex flex-col md:flex-row gap-12 items-start mb-12">
             <div className="w-full md:w-1/2">
-               <h3 className="text-4xl md:text-5xl font-black text-white mb-8 uppercase border-b-4 border-red-600 inline-block pb-2">
-                 {menuData.categories.dessertsDrinks}
-               </h3>
-               
-               <div className="mb-10">
-                 <h4 className="text-3xl font-bold text-red-500 mb-4 uppercase drop-shadow-md">{menuData.desserts.title}</h4>
-                 <ul className="space-y-4">
-                   {menuData.desserts.items.map((item, i) => (
-                     <li key={i} className="flex justify-between text-xl font-bold items-center">
-                       <span className="uppercase text-stone-100">{item.name}</span>
-                       <span className="text-yellow-400 bg-stone-800/80 px-3 py-1 rounded-md">${item.price}</span>
-                     </li>
-                   ))}
-                 </ul>
-               </div>
+              <h3 className="text-4xl md:text-5xl font-black text-white mb-8 uppercase border-b-4 border-red-600 inline-block pb-2">
+                {menuData.categories.dessertsDrinks}
+              </h3>
 
-               <div className="mb-10">
-                 <h4 className="text-3xl font-bold text-red-500 mb-4 uppercase flex items-center gap-4 drop-shadow-md">
-                   {menuData.smoothies.title} 
-                   <span className="text-yellow-400 text-2xl bg-stone-800/80 px-3 py-1 rounded-md">$6</span>
-                 </h4>
-                 <ul className="space-y-2">
-                   {menuData.smoothies.items.map((item, i) => (
-                     <li key={i} className="text-xl font-bold uppercase text-stone-200">{item.name}</li>
-                   ))}
-                 </ul>
-               </div>
+              <div className="mb-10">
+                <h4 className="text-3xl font-bold text-red-500 mb-4 uppercase drop-shadow-md">{menuData.desserts.title}</h4>
+                <ul className="space-y-4">
+                  {menuData.desserts.items.map((item, i) => (
+                    <li key={i} className="flex justify-between text-xl font-bold items-center">
+                      <span className="uppercase text-stone-100">{item.name}</span>
+                      <span className="text-yellow-400 bg-stone-800/80 px-3 py-1 rounded-md">${item.price}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-               <div>
-                 <h4 className="text-3xl font-bold text-red-500 mb-4 uppercase drop-shadow-md">{menuData.drinksSodas.title}</h4>
-                 <ul className="space-y-4">
-                   {menuData.drinksSodas.items.map((item, i) => (
-                     <li key={i} className="flex flex-col border-b border-stone-800 pb-2">
-                       <div className="flex justify-between text-lg font-bold items-center">
-                         <span className="uppercase text-stone-100">{item.name}</span>
-                         <span className="text-yellow-400">${item.price}</span>
-                       </div>
-                       {item.desc && <span className="text-stone-400 text-sm font-normal mt-1">{item.desc}</span>}
-                     </li>
-                   ))}
-                 </ul>
-               </div>
+              <div className="mb-10">
+                <h4 className="text-3xl font-bold text-red-500 mb-4 uppercase flex items-center gap-4 drop-shadow-md">
+                  {menuData.smoothies.title}
+                  <span className="text-yellow-400 text-2xl bg-stone-800/80 px-3 py-1 rounded-md">$6</span>
+                </h4>
+                <ul className="space-y-2">
+                  {menuData.smoothies.items.map((item, i) => (
+                    <li key={i} className="text-xl font-bold uppercase text-stone-200">{item.name}</li>
+                  ))}
+                </ul>
+              </div>
+
+              <div>
+                <h4 className="text-3xl font-bold text-red-500 mb-4 uppercase drop-shadow-md">{menuData.drinksSodas.title}</h4>
+                <ul className="space-y-4">
+                  {menuData.drinksSodas.items.map((item, i) => (
+                    <li key={i} className="flex flex-col border-b border-stone-800 pb-2">
+                      <div className="flex justify-between text-lg font-bold items-center">
+                        <span className="uppercase text-stone-100">{item.name}</span>
+                        <span className="text-yellow-400">${item.price}</span>
+                      </div>
+                      {item.desc && <span className="text-stone-400 text-sm font-normal mt-1">{item.desc}</span>}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
-            
-            {/* Image Placeholders */}
-            <div className="w-full md:w-1/2 flex flex-col gap-6">
-               <div className="bg-stone-800/60 backdrop-blur-sm rounded-xl aspect-video flex items-center justify-center border border-stone-700/50 shadow-2xl overflow-hidden relative group transition-transform hover:scale-105 duration-300">
-                 <Image 
-                   src="/postre-rinconcito.png" 
-                   alt="Postres El Rinconcito" 
-                   fill 
-                   style={{ objectFit: 'contain' }} 
-                   className="opacity-90 hover:opacity-100 transition-opacity duration-300 p-2" 
-                 />
-               </div>
-               <div className="bg-stone-800/60 backdrop-blur-sm rounded-xl aspect-video flex items-center justify-center border border-stone-700/50 shadow-2xl overflow-hidden relative group transition-transform hover:scale-105 duration-300">
-                 <Image 
-                   src="/bebidas-rinconcito.png" 
-                   alt="Bebidas El Rinconcito" 
-                   fill 
-                   style={{ objectFit: 'contain' }} 
-                   className="opacity-90 hover:opacity-100 transition-opacity duration-300 p-2" 
-                 />
-               </div>
+
+            {/* Desserts & Drinks images */}
+            <div className="w-full md:w-1/2 flex flex-col gap-6 mt-8 md:mt-16">
+              <MenuImage src="/postre-rinconcito.png" alt="Postres El Rinconcito" />
+              <MenuImage src="/bebidas-rinconcito.png" alt="Bebidas El Rinconcito" />
             </div>
           </div>
         </div>
