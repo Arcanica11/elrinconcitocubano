@@ -1,13 +1,128 @@
 {
   "navbar":{
     "home": "Home",
-    "services": "SErvices",
-    "aboutUs": "Abaut Us",
+    "services": "Services",
+    "aboutUs": "About Us",
     "contactUs": "Contact Us"
   },
   "hero":{  
-   "title": "El Rinconcito Cubano",
+    "title": "El Rinconcito Cubano",
     "subtitle": "Authentic cuisine celebrating heritage and passion.",
     "button": "View Menu"
+  },
+  "menu": {
+    "title": "Our Menu",
+    "categories": {
+      "dessertsDrinks": "Desserts & Drinks",
+      "mainDishes": "Main Dishes",
+      "cubanPizza": "Cuban Pizza",
+      "fullMeals": "Full Meals & Portions"
+    },
+    "desserts": {
+      "title": "Desserts",
+      "items": [
+        {"name": "Flan", "price": "5.00"},
+        {"name": "Cold Pasta Salad", "price": "5.00"}
+      ]
+    },
+    "smoothies": {
+      "title": "Smoothies",
+      "items": [
+        {"name": "Mamey", "price": "6.00"},
+        {"name": "Mango", "price": "6.00"}
+      ]
+    },
+    "drinksSodas": {
+      "title": "Drinks & Sodas",
+      "items": [
+        {"name": "Topo Chico", "price": "3.00"},
+        {"name": "Sodas", "desc": "Pineapple, Coca-Cola, Fanta, Lemon-Lime, Hyper Malt", "price": "2.00"},
+        {"name": "Natural Juices", "desc": "Mango, Guayaba", "price": "2.00"},
+        {"name": "Water", "price": "1.00"},
+        {"name": "Coffee", "price": "1.00"},
+        {"name": "Bucanero Malt", "price": "2.00"}
+      ]
+    },
+    "mainDishesList": {
+      "title": "Main Dishes",
+      "items": [
+        {"name": "Chickpea Stew", "price": "25.00"},
+        {"name": "Tamales", "price": "6.00"},
+        {"name": "Pork Sandwich / Slider", "price": "10.00"},
+        {"name": "Paella El Rinconcito", "price": "100.00"},
+        {"name": "Personal Paella", "price": "30.00"},
+        {"name": "El Rinconcito Meat Platters", "desc": "Fried ribs, picanha, pork rinds, chorizo, moro rice, tamales and cheese croquette", "price": "100.00"},
+        {"name": "Fried Rice with Shrimp", "desc": "Served with fried sweet plantains", "price": "25.00"},
+        {"name": "Kids Menu", "desc": "Chicken nuggets with french fries", "price": "10.00"}
+      ]
+    },
+    "cubanPizza": {
+      "title": "Cuban Pizza",
+      "classics": "Classics",
+      "specials": "Specials",
+      "vegetables": "Vegetables",
+      "extras": "Extras",
+      "classicsItems": [
+        {"name": "Cheese Pizza", "price": "9.35"},
+        {"name": "Ham Pizza", "price": "10.92"},
+        {"name": "Pepperoni Pizza", "price": "10.92"},
+        {"name": "Onion Pizza", "price": "10.92"},
+        {"name": "Bell Pepper Pizza", "price": "10.92"},
+        {"name": "Sausage Pizza", "price": "10.92"}
+      ],
+      "specialsItems": [
+        {"name": "Hawaiian Pizza", "price": "11.96"},
+        {"name": "Shredded Beef Pizza", "price": "13.52"},
+        {"name": "Bacon Pizza", "price": "11.96"},
+        {"name": "Guava Pizza", "price": "10.92"},
+        {"name": "Chorizo Pizza", "price": "10.92"},
+        {"name": "Roast Pork Pizza", "price": "12.48"},
+        {"name": "Shrimp Pizza", "price": "13.52"},
+        {"name": "Tuna Pizza", "price": "12.48"}
+      ],
+      "vegetablesItems": [
+        {"name": "Veggie Pizza", "price": "10.79"}
+      ],
+      "extrasItems": [
+        {"name": "Extra Cheese", "price": "2.00"},
+        {"name": "Extra Toppings", "price": "2.00"}
+      ],
+      "elRinconcitoPizza": {
+        "name": "El Rinconcito Pizza",
+        "desc": "Ham, Chorizo, Shredded Beef, Shrimp, Pineapple",
+        "price": "15.00"
+      }
+    },
+    "fullMeals": {
+      "title": "Full Meals & Portions",
+      "appetizers": "Appetizers",
+      "fullMeal": "Full Meal",
+      "appetizersItems": [
+        {"name": "Ham and Cheese Tostones", "price": "10.00"},
+        {"name": "Tuna Tostones", "price": "10.00"},
+        {"name": "Croquettes", "price": "10.00"}
+      ],
+      "mainDishesDesc": "Main Dishes",
+      "fullMealItems": [
+        {"name": "Roast Pork", "price": "20.00"},
+        {"name": "Pork Steak with Onions", "price": "20.00"},
+        {"name": "Pork Fricassee", "price": "20.00"},
+        {"name": "Fried Chicken with French Fries", "price": "20.00"},
+        {"name": "Shredded Beef Stew - Ropa Vieja", "price": "20.00"},
+        {"name": "Beef Steak with Onions", "price": "20.00"},
+        {"name": "Fried Pork Ribs", "price": "20.00"},
+        {"name": "Fried Pork Chunks", "price": "20.00"},
+        {"name": "Grilled Pork Chop", "price": "20.00"},
+        {"name": "Fried King Mackerel Steak", "price": "20.00"}
+      ],
+      "lambStew": {
+        "name": "Lamb Stew",
+        "price": "25.00"
+      },
+      "servedWith": {
+        "title": "All platters are served with",
+        "items": ["Moro Rice", "Side Salad", "Cassava with Criollo Mojo"]
+      }
+    }
   }
 }

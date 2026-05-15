@@ -2,8 +2,7 @@
 
 // Componentes de la página
 import { Hero } from '../../components/Hero.js'; 
-import MenuOne from '../../components/MenuOne.js'; 
-import MenuTwo from '../../components/menuTwo.js'; 
+import Menu from '../../components/Menu.js'; 
 import Footer from '../../components/Footer.js';
 import Navbar from '../../components/Navbar.js'; // Asumo que también tienes un Navbar
 
@@ -21,15 +20,11 @@ export default async function Home({ params: { locale } }) {
       <Hero locale={locale} />
       
       {/* Añadimos un id="menu" para que el botón del Hero pueda hacer scroll hacia aquí */}
-      <div id="menu">
+      <div>
         {/* 2. Envolvemos cada sección del menú con AnimatedSection
                para que aparezcan con una animación al hacer scroll. */}
         <AnimatedSection>
-          <MenuOne />
-        </AnimatedSection>
-
-        <AnimatedSection>
-          <MenuTwo />
+          <Menu locale={locale} />
         </AnimatedSection>
       </div>
       

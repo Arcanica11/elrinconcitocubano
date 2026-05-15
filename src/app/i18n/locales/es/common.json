@@ -9,5 +9,120 @@
     "title": "El Rinconcito Cubano",
     "subtitle": "Auténtica cocina que celebra la herencia y la pasión.",
     "button": "Ver Menú"
-}
+  },
+  "menu": {
+    "title": "Nuestro Menú",
+    "categories": {
+      "dessertsDrinks": "Postres y Bebidas",
+      "mainDishes": "Platos Principales",
+      "cubanPizza": "Pizza Cubana",
+      "fullMeals": "Comidas Completas"
+    },
+    "desserts": {
+      "title": "Postres",
+      "items": [
+        {"name": "Flan", "price": "5.00"},
+        {"name": "Ensalada Fría de Pasta", "price": "5.00"}
+      ]
+    },
+    "smoothies": {
+      "title": "Batidos",
+      "items": [
+        {"name": "Mamey", "price": "6.00"},
+        {"name": "Mango", "price": "6.00"}
+      ]
+    },
+    "drinksSodas": {
+      "title": "Bebidas y Refrescos",
+      "items": [
+        {"name": "Topo Chico", "price": "3.00"},
+        {"name": "Refrescos", "desc": "Piña, Coca-Cola, Fanta, Limón, Hyper Malt", "price": "2.00"},
+        {"name": "Jugos Naturales", "desc": "Mango, Guayaba", "price": "2.00"},
+        {"name": "Agua", "price": "1.00"},
+        {"name": "Café", "price": "1.00"},
+        {"name": "Malta Bucanero", "price": "2.00"}
+      ]
+    },
+    "mainDishesList": {
+      "title": "Platos Principales",
+      "items": [
+        {"name": "Potaje de Garbanzos", "price": "25.00"},
+        {"name": "Tamales", "price": "6.00"},
+        {"name": "Sándwich de Cerdo / Slider", "price": "10.00"},
+        {"name": "Paella El Rinconcito", "price": "100.00"},
+        {"name": "Paella Personal", "price": "30.00"},
+        {"name": "Bandejas de Carne El Rinconcito", "desc": "Costillas fritas, picaña, chicharrón, chorizo, arroz moro, tamales y croqueta de queso", "price": "100.00"},
+        {"name": "Arroz Frito con Camarones", "desc": "Servido con plátano maduro frito", "price": "25.00"},
+        {"name": "Menú Infantil", "desc": "Nuggets de pollo con papas fritas", "price": "10.00"}
+      ]
+    },
+    "cubanPizza": {
+      "title": "Pizza Cubana",
+      "classics": "Clásicas",
+      "specials": "Especiales",
+      "vegetables": "Vegetales",
+      "extras": "Extras",
+      "classicsItems": [
+        {"name": "Pizza de Queso", "price": "9.35"},
+        {"name": "Pizza de Jamón", "price": "10.92"},
+        {"name": "Pizza de Pepperoni", "price": "10.92"},
+        {"name": "Pizza de Cebolla", "price": "10.92"},
+        {"name": "Pizza de Pimiento", "price": "10.92"},
+        {"name": "Pizza de Salchicha", "price": "10.92"}
+      ],
+      "specialsItems": [
+        {"name": "Pizza Hawaiana", "price": "11.96"},
+        {"name": "Pizza de Ropa Vieja", "price": "13.52"},
+        {"name": "Pizza de Tocino", "price": "11.96"},
+        {"name": "Pizza de Guayaba", "price": "10.92"},
+        {"name": "Pizza de Chorizo", "price": "10.92"},
+        {"name": "Pizza de Cerdo Asado", "price": "12.48"},
+        {"name": "Pizza de Camarones", "price": "13.52"},
+        {"name": "Pizza de Atún", "price": "12.48"}
+      ],
+      "vegetablesItems": [
+        {"name": "Pizza Vegetariana", "price": "10.79"}
+      ],
+      "extrasItems": [
+        {"name": "Queso Extra", "price": "2.00"},
+        {"name": "Ingredientes Extra", "price": "2.00"}
+      ],
+      "elRinconcitoPizza": {
+        "name": "Pizza El Rinconcito",
+        "desc": "Jamón, Chorizo, Ropa Vieja, Camarones, Piña",
+        "price": "15.00"
+      }
+    },
+    "fullMeals": {
+      "title": "Comidas Completas y Porciones",
+      "appetizers": "Aperitivos",
+      "fullMeal": "Comida Completa",
+      "appetizersItems": [
+        {"name": "Tostones con Jamón y Queso", "price": "10.00"},
+        {"name": "Tostones con Atún", "price": "10.00"},
+        {"name": "Croquetas", "price": "10.00"}
+      ],
+      "mainDishesDesc": "Platos Principales",
+      "fullMealItems": [
+        {"name": "Cerdo Asado", "price": "20.00"},
+        {"name": "Filete de Cerdo Encebollado", "price": "20.00"},
+        {"name": "Fricasé de Cerdo", "price": "20.00"},
+        {"name": "Pollo Frito con Papas Fritas", "price": "20.00"},
+        {"name": "Ropa Vieja", "price": "20.00"},
+        {"name": "Bistec Encebollado", "price": "20.00"},
+        {"name": "Costillas de Cerdo Fritas", "price": "20.00"},
+        {"name": "Masas de Cerdo Fritas", "price": "20.00"},
+        {"name": "Chuleta de Cerdo a la Parrilla", "price": "20.00"},
+        {"name": "Rueda de Sierra Frita", "price": "20.00"}
+      ],
+      "lambStew": {
+        "name": "Fricasé de Carnero",
+        "price": "25.00"
+      },
+      "servedWith": {
+        "title": "Todos los platos se sirven con",
+        "items": ["Arroz Moro", "Ensalada", "Yuca con Mojo Criollo"]
+      }
+    }
+  }
 }
