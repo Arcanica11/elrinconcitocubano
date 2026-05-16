@@ -3,7 +3,6 @@
 
 import { useTranslation } from '../app/i18n';
 import Link from 'next/link';
-import Image from 'next/image';
 import { FaMapMarkerAlt, FaPhoneAlt, FaWhatsapp } from 'react-icons/fa';
 
 export const Hero = async ({ locale }) => {
@@ -32,13 +31,12 @@ export const Hero = async ({ locale }) => {
       <div className="relative z-20 flex flex-col items-center px-6 text-center py-20">
         
         {/* Logo */}
-        <div className="mb-8 relative w-36 h-36 md:w-48 md:h-48 drop-shadow-2xl">
-          <Image
+        <div className="mb-8 drop-shadow-2xl">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
             src="/logo.png"
             alt="El Rinconcito Cubano Logo"
-            fill
-            style={{ objectFit: 'contain' }}
-            priority
+            style={{ width: '180px', height: '180px', objectFit: 'contain', display: 'block', margin: '0 auto' }}
           />
         </div>
 

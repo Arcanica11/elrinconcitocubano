@@ -1,24 +1,39 @@
 import { getTranslation } from '../app/i18n';
-import Image from 'next/image';
+
+// Use a plain <img> tag to guarantee the browser resolves
+// the path correctly regardless of locale routing or client/server context.
+// Next.js serves /public files at the root — these paths are absolute.
 
 const Menu = async ({ locale }) => {
   const { t } = await getTranslation(locale, 'common');
-
   const menuData = t('menu', { returnObjects: true });
 
   if (!menuData || !menuData.categories) return null;
 
-  // Helper: Image wrapper with consistent styling - object-fit contain keeps full image visible
-  const MenuImage = ({ src, alt }) => (
-    <div className="relative w-full overflow-hidden rounded-xl border border-stone-700/50 shadow-2xl bg-stone-900 transition-transform hover:scale-105 duration-300" style={{ aspectRatio: '16/9' }}>
-      <Image
-        src={src}
-        alt={alt}
-        fill
-        sizes="(max-width: 768px) 100vw, 50vw"
-        style={{ objectFit: 'contain' }}
-        className="opacity-90 hover:opacity-100 transition-opacity duration-300 p-2"
-      />
+  // Simple image wrapper — plain <img>, always absolute from domain root
+  const Img = ({ src, alt }) => (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={src}
+      alt={alt}
+      style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block', padding: '8px' }}
+    />
+  );
+
+  const ImgBox = ({ src, alt, ratio = '56.25%' }) => (
+    <div style={{
+      position: 'relative',
+      width: '100%',
+      paddingBottom: ratio,
+      overflow: 'hidden',
+      borderRadius: '12px',
+      border: '1px solid rgba(87,83,78,0.5)',
+      backgroundColor: '#1c1917',
+      boxShadow: '0 25px 50px -12px rgba(0,0,0,0.5)',
+    }}>
+      <div style={{ position: 'absolute', inset: 0 }}>
+        <Img src={src} alt={alt} />
+      </div>
     </div>
   );
 
@@ -45,7 +60,6 @@ const Menu = async ({ locale }) => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-            {/* Left column: Classics, Vegetables, Extras */}
             <div className="bg-stone-800/30 p-8 rounded-2xl border border-stone-700/50">
               <h4 className="text-3xl font-bold text-red-500 mb-6 uppercase text-center tracking-wide">{menuData.cubanPizza.classics}</h4>
               <ul className="space-y-3 mb-10">
@@ -56,7 +70,6 @@ const Menu = async ({ locale }) => {
                   </li>
                 ))}
               </ul>
-
               <h4 className="text-3xl font-bold text-red-500 mb-6 uppercase text-center tracking-wide">{menuData.cubanPizza.vegetables}</h4>
               <ul className="space-y-3 mb-10">
                 {menuData.cubanPizza.vegetablesItems.map((item, i) => (
@@ -66,7 +79,6 @@ const Menu = async ({ locale }) => {
                   </li>
                 ))}
               </ul>
-
               <h4 className="text-3xl font-bold text-red-500 mb-6 uppercase text-center tracking-wide">{menuData.cubanPizza.extras}</h4>
               <ul className="space-y-3">
                 {menuData.cubanPizza.extrasItems.map((item, i) => (
@@ -78,7 +90,6 @@ const Menu = async ({ locale }) => {
               </ul>
             </div>
 
-            {/* Right column: Specials + El Rinconcito Pizza + Pizza image */}
             <div className="flex flex-col gap-8">
               <div className="bg-stone-800/30 p-8 rounded-2xl border border-stone-700/50 flex-grow">
                 <h4 className="text-3xl font-bold text-red-500 mb-6 uppercase text-center tracking-wide">{menuData.cubanPizza.specials}</h4>
@@ -90,19 +101,15 @@ const Menu = async ({ locale }) => {
                     </li>
                   ))}
                 </ul>
-
                 <div className="bg-gradient-to-r from-red-900/80 to-stone-900 p-6 rounded-xl border-l-4 border-red-500 shadow-2xl mt-8 transform transition hover:-translate-y-1">
                   <h4 className="text-2xl font-black text-white uppercase flex justify-between items-center mb-2">
                     <span>{menuData.cubanPizza.elRinconcitoPizza.name}</span>
                     <span className="text-yellow-400 bg-black/40 px-3 py-1 rounded-lg">${menuData.cubanPizza.elRinconcitoPizza.price}</span>
                   </h4>
-                  <p className="text-stone-300 font-medium text-sm uppercase">
-                    {menuData.cubanPizza.elRinconcitoPizza.desc}
-                  </p>
+                  <p className="text-stone-300 font-medium text-sm uppercase">{menuData.cubanPizza.elRinconcitoPizza.desc}</p>
                 </div>
               </div>
-
-              <MenuImage src="/pizza-rinconcito.png" alt="Pizza El Rinconcito" />
+              <ImgBox src="/pizza-rinconcito.png" alt="Pizza El Rinconcito" />
             </div>
           </div>
         </div>
@@ -114,7 +121,7 @@ const Menu = async ({ locale }) => {
           </h3>
           <div className="flex flex-col-reverse md:flex-row gap-12 items-start">
             <div className="w-full md:w-1/2">
-              <MenuImage src="/plato-principales-rinconcito.png" alt="Platos Principales El Rinconcito" />
+              <ImgBox src="/plato-principales-rinconcito.png" alt="Platos Principales El Rinconcito" />
             </div>
             <div className="w-full md:w-1/2">
               <ul className="space-y-6">
@@ -137,7 +144,6 @@ const Menu = async ({ locale }) => {
           <h3 className="text-5xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-yellow-500 mb-16 uppercase text-center drop-shadow-lg">
             {menuData.categories.fullMeals}
           </h3>
-
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
             <div className="flex flex-col gap-8">
               <div className="bg-stone-800/30 p-8 rounded-2xl border border-stone-700/50">
@@ -151,8 +157,7 @@ const Menu = async ({ locale }) => {
                   ))}
                 </ul>
               </div>
-
-              <MenuImage src="/aperitivos-rinconcito.png" alt="Aperitivos El Rinconcito" />
+              <ImgBox src="/aperitivos-rinconcito.png" alt="Aperitivos El Rinconcito" />
             </div>
 
             <div className="bg-stone-800/30 p-8 rounded-2xl border border-stone-700/50">
@@ -164,26 +169,21 @@ const Menu = async ({ locale }) => {
                   </h4>
                   <h5 className="text-2xl font-bold text-red-500 uppercase tracking-widest">{menuData.fullMeals.mainDishesDesc}</h5>
                 </div>
-
                 <ul className="space-y-3">
                   {menuData.fullMeals.fullMealItems.map((item, i) => (
                     <li key={i} className="text-lg font-bold uppercase text-stone-200 flex items-center before:content-['•'] before:text-red-500 before:mr-3">{item.name}</li>
                   ))}
                 </ul>
               </div>
-
               <div className="mb-10 bg-red-900/20 p-6 rounded-xl border border-red-900/50">
                 <h4 className="text-3xl font-black text-red-500 uppercase flex justify-between items-center">
                   <span>{menuData.fullMeals.lambStew.name}</span>
                   <span className="text-yellow-400 bg-stone-900/80 px-4 py-2 rounded-lg border border-stone-700 shadow-md">${menuData.fullMeals.lambStew.price}</span>
                 </h4>
               </div>
-
               <div className="bg-gradient-to-br from-stone-900 to-stone-800 p-6 rounded-xl border-t-4 border-yellow-500 shadow-xl relative overflow-hidden">
                 <div className="absolute -right-10 -top-10 text-yellow-500/10 text-9xl">★</div>
-                <h4 className="text-xl font-black text-white uppercase mb-4 relative z-10 drop-shadow-md">
-                  {menuData.fullMeals.servedWith.title}
-                </h4>
+                <h4 className="text-xl font-black text-white uppercase mb-4 relative z-10 drop-shadow-md">{menuData.fullMeals.servedWith.title}</h4>
                 <ul className="space-y-2 relative z-10">
                   {menuData.fullMeals.servedWith.items.map((item, i) => (
                     <li key={i} className="text-yellow-400 font-bold uppercase text-sm tracking-wider flex items-center gap-2">
@@ -199,12 +199,11 @@ const Menu = async ({ locale }) => {
 
         {/* ─── 4. DESSERTS & DRINKS ─── */}
         <div className="mb-12">
-          <div className="flex flex-col md:flex-row gap-12 items-start mb-12">
+          <div className="flex flex-col md:flex-row gap-12 items-start">
             <div className="w-full md:w-1/2">
               <h3 className="text-4xl md:text-5xl font-black text-white mb-8 uppercase border-b-4 border-red-600 inline-block pb-2">
                 {menuData.categories.dessertsDrinks}
               </h3>
-
               <div className="mb-10">
                 <h4 className="text-3xl font-bold text-red-500 mb-4 uppercase drop-shadow-md">{menuData.desserts.title}</h4>
                 <ul className="space-y-4">
@@ -216,7 +215,6 @@ const Menu = async ({ locale }) => {
                   ))}
                 </ul>
               </div>
-
               <div className="mb-10">
                 <h4 className="text-3xl font-bold text-red-500 mb-4 uppercase flex items-center gap-4 drop-shadow-md">
                   {menuData.smoothies.title}
@@ -228,7 +226,6 @@ const Menu = async ({ locale }) => {
                   ))}
                 </ul>
               </div>
-
               <div>
                 <h4 className="text-3xl font-bold text-red-500 mb-4 uppercase drop-shadow-md">{menuData.drinksSodas.title}</h4>
                 <ul className="space-y-4">
@@ -244,11 +241,9 @@ const Menu = async ({ locale }) => {
                 </ul>
               </div>
             </div>
-
-            {/* Desserts & Drinks images */}
-            <div className="w-full md:w-1/2 flex flex-col gap-6 mt-8 md:mt-16">
-              <MenuImage src="/postre-rinconcito.png" alt="Postres El Rinconcito" />
-              <MenuImage src="/bebidas-rinconcito.png" alt="Bebidas El Rinconcito" />
+            <div className="w-full md:w-1/2 flex flex-col gap-6 mt-4 md:mt-16">
+              <ImgBox src="/postre-rinconcito.png" alt="Postres El Rinconcito" />
+              <ImgBox src="/bebidas-rinconcito.png" alt="Bebidas El Rinconcito" />
             </div>
           </div>
         </div>
